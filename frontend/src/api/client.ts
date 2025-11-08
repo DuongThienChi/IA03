@@ -1,6 +1,7 @@
 import axios from 'axios';
 
-const baseURL = import.meta.env.VITE_API_URL ?? 'http://api.localhost';
+// Default to same-origin /api so HTTPS frontends can reverse proxy without mixed-content.
+const baseURL = import.meta.env.VITE_API_URL ?? '/api';
 
 export const apiClient = axios.create({
   baseURL,
