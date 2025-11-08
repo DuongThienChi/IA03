@@ -20,7 +20,12 @@ export function RegisterPage() {
   >({
     mutationFn: registerUser,
     onSuccess: (data, variables) => {
-      setSuccessMessage(`Account created for ${data.user.email}`);
+      const registeredEmail = data.user?.email;
+      if (!registeredEmail) {
+        throw new Error('Server response missing registered user details.');
+      }
+      const baseMessage = data.message ?? 'User registered successfully';
+      setSuccessMessage(`${baseMessage} (${registeredEmail})`);
       form.reset({ email: variables.email, password: '' });
     },
   });
@@ -41,6 +46,9 @@ export function RegisterPage() {
         return message;
       }
       return 'Registration failed. Please try again.';
+    }
+    if (error instanceof Error) {
+      return error.message;
     }
     return 'Something went wrong. Please try again.';
   })();

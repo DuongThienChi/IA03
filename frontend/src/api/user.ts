@@ -6,8 +6,8 @@ export type RegisterPayload = {
 };
 
 export type RegisterResponse = {
-  message: string;
-  user: {
+  message?: string;
+  user?: {
     _id: string;
     email: string;
     createdAt: string;
