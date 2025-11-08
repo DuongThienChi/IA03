@@ -9,8 +9,9 @@ Currently, two official plugins are available:
 
 ## API proxying
 
-- Frontend requests default to the relative `/api` path. Configure your reverse proxy (Nginx, Traefik, etc.) to forward `/api/*` to the backend (HTTP is fine even when the site itself is HTTPS).
-- During local development you can override the proxy target with `VITE_DEV_API_TARGET` before running `npm run dev`.
+- Frontend requests default to the relative `/api` path. Configure your reverse proxy (Nginx, Traefik, Render rewrite rules, etc.) to forward `/api/*` to the backend. This keeps HTTPS frontends from calling insecure backends directly and prevents mixed content errors.
+- The API base can be overridden with `VITE_API_URL`, but make sure it uses `https://` in production builds.
+- During local development you can override the proxy target with `VITE_DEV_API_TARGET` (see `.env.example`) before running `npm run dev`.
 
 ## React Compiler
 
